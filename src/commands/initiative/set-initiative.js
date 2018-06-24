@@ -1,7 +1,6 @@
 module.exports = {
     commandAlias: 'set initiative',
-    commandParseRegex: new RegExp('!dnd set initiative (.+)', 'ig'),
-    inlineCommand: false,
+    commandParseRegex: new RegExp('^!dnd set initiative (.+)$', 'ig'),
     action: async function (message) {
         this.commandParseRegex.lastIndex = 0;
 
