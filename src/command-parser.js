@@ -26,11 +26,13 @@ class CommandParser {
     }
 
     registerCommand (command) {
-        const { commandAlias } = command;
+        const { commandAlias, commandParseRegex } = command;
 
         if (!commandAlias) return console.error("RegisterCommand: You must provide an alias so this command can be called by a user");
 
         if (this.commands[commandAlias]) return console.error(`RegisterCommand: The command ${commandAlias} has already been registered`);
+
+        if (!commandParseRegex) return console.error(`RegisterCommand: The command ${commandAlias} must have a commandParseRegex field for pattern matching`);
 
         this.commands[commandAlias] = command;
     }
