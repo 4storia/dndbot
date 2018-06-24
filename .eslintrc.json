@@ -1,0 +1,22 @@
+{
+    "env": {
+        "es6": true,
+        "node": true
+    },
+    "parserOptions": {
+        "ecmaVersion": 2018,
+        "sourceType": "module",
+        "ecmaFeatures": {
+        }
+    },
+    "extends": "eslint:recommended",
+    "rules": {
+        "no-console": 0,
+        "space-before-function-paren": ["error", "always"],
+        "space-before-blocks": ["error", "always"],
+        "keyword-spacing": ["error", { "before": true, "after": true }],
+        "object-curly-spacing": ["error", "always"],
+        "array-bracket-spacing": ["error", "always"],
+        "semi": 2
+    }
+}

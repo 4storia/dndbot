@@ -1,0 +1,29 @@
+{
+  "name": "dndbot",
+  "version": "0.0.1",
+  "description": "Discord bot for playing DnD",
+  "main": "index.js",
+  "scripts": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/4storia/dndbot.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/4storia/dndbot/issues"
+  },
+  "homepage": "https://github.com/4storia/dndbot#readme",
+  "dependencies": {
+    "dice-expression-evaluator": "^0.1.2",
+    "discord.js": "^11.3.2",
+    "erlpack": "^0.1.2",
+    "uws": "^10.148.1",
+    "zlib-sync": "^0.1.4"
+  },
+  "devDependencies": {
+    "babel-eslint": "^8.2.5",
+    "eslint": "^5.0.0",
+    "eslint-config-airbnb": "^17.0.0"
+  }
+}
