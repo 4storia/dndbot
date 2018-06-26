@@ -1,6 +1,6 @@
 module.exports = {
-    commandAlias: 'set initiative',
-    commandParseRegex: new RegExp('^!dnd set initiative (.+)$', 'ig'),
+    alias: 'set initiative',
+    contentRegex: new RegExp('(.+)', 'ig'),
     action: async function (message) {
         this.commandParseRegex.lastIndex = 0;
 
@@ -21,9 +21,10 @@ module.exports = {
             return `${index + 1}. ${creature}`;
         });
 
-        const initiativeMessage = `__Current Initiative Order__\n` +
+        const initiativeMessage = `__Current Turn Order__\n` +
             `\n${formattedCreatureList.join('\n')}`;
 
         message.channel.send(initiativeMessage).then(messageObj => messageObj.pin());
+        message.channel.send(`Current turn: ${creatureList[0]}`).then(messageObj => messageObj.pin());
     }
 };

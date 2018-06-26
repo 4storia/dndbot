@@ -21,12 +21,6 @@ client.login(apiToken);
 
 commandParser.registerCommands(commands);
 
-
-// commandParser.parse({ author: {}, content: '!dnd set initiative a, b, c'});
-
-
-
-
 client.on('message', async (message) => {
     const command = await commandParser.parse(message);
 

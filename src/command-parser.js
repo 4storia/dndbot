@@ -2,7 +2,7 @@ class CommandParser {
     constructor (options = {}) {
         this.botId = options.botId;
         this.ignoreOwnMessages = options.ignoreOwnMessages;
-        this.namespace = options.namespace + ' ' || '';
+        this.namespace = options.namespace || '';
         this.commands = {};
     }
 
@@ -14,8 +14,12 @@ class CommandParser {
             if (!command.commandParseRegex.test(messageContent)) {
                 continue;
             }
-
-            await command.action.call({ ...this, ...command }, message);
+            
+            try {
+                await command.action.call({ ...this, ...command }, message);
+            } catch (err) {
+                console.error(`Error running command ${command.alias}:`, err);
+            }
         }
     }
 
@@ -26,15 +30,29 @@ class CommandParser {
     }
 
     registerCommand (command) {
-        const { commandAlias, commandParseRegex } = command;
+        const { alias, contentRegex } = command;
 
-        if (!commandAlias) return console.error("RegisterCommand: You must provide an alias so this command can be called by a user");
+        if (!alias) return console.error("RegisterCommand: You must provide an alias so this command can be called by a user");
 
-        if (this.commands[commandAlias]) return console.error(`RegisterCommand: The command ${commandAlias} has already been registered`);
+        if (this.commands[alias]) return console.error(`RegisterCommand: The command ${alias} has already been registered`);
 
-        if (!commandParseRegex) return console.error(`RegisterCommand: The command ${commandAlias} must have a commandParseRegex field for pattern matching`);
+        let commandParseRegex = new RegExp(`(?:!${this.namespace}|<@${this.botId}>) ${alias}`, 'ig');
 
-        this.commands[commandAlias] = command;
+        if (command.inline) {
+            if (contentRegex) {
+                commandParseRegex = new RegExp(commandParseRegex.source + ' ' + contentRegex.source, 'ig');
+            }
+        } else {
+            if (contentRegex) {
+                commandParseRegex = new RegExp(commandParseRegex.source + ' ' + contentRegex.source, 'i');
+            }
+
+            commandParseRegex = new RegExp('^' + commandParseRegex.source + '$', 'i');
+        }
+
+        command.commandParseRegex = commandParseRegex;
+
+        this.commands[alias] = command;
     }
 }
 
