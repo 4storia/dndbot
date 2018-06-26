@@ -1,5 +1,5 @@
 module.exports = {
-    alias: 'next initiative',
+    alias: 'next turn',
     action: async function (message) {
         const pinnedMessages = await message.channel.fetchPinnedMessages();
 

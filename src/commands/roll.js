@@ -28,7 +28,7 @@ module.exports = {
                 const detailMessage = rollResults.roll > 20 ? `, FOR A TOTAL OF ${rollResults.roll} ${rollDetails}` : '';
                 rollMessage = `🎉🎉🎉🎉🎉🎉 ${message.author} **ROLLED A NATURAL 20${detailMessage}** 🎉🎉🎉🎉🎉🎉 `;
             } else if (critFail) {
-                rollMessage = `☠☠☠☠☠☠ ....${message.author} rolled a critical failure of **${rollResults.roll}**${rollDetails} ☠☠☠☠☠☠`;
+                rollMessage = `....${message.author} rolled a critical failure of **${rollResults.roll}**${rollDetails}`;
             }
 
             const messageObj = await message.channel.send(rollMessage);
@@ -39,7 +39,7 @@ module.exports = {
             }
 
             if (critFail) {
-                messageObj.react('☠');
+                messageObj.react('🗑️');
                 messageObj.react('👺');
             }
         });

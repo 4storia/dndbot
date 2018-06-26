@@ -14,7 +14,7 @@ class CommandParser {
             if (!command.commandParseRegex.test(messageContent)) {
                 continue;
             }
-            
+
             try {
                 await command.action.call({ ...this, ...command }, message);
             } catch (err) {
@@ -49,7 +49,7 @@ class CommandParser {
 
             commandParseRegex = new RegExp('^' + commandParseRegex.source + '$', 'i');
         }
-
+        console.log(commandParseRegex);
         command.commandParseRegex = commandParseRegex;
 
         this.commands[alias] = command;
